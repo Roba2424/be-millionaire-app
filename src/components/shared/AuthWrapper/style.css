@@ -1,0 +1,13 @@
+.auth_wrapper {
+  display: grid;
+  width: 600px;
+  margin: 0 auto;
+  background-color: #f7f7f7cc;
+  padding: 12px;
+  border: 1px solid black;
+  border-radius: 1rem;
+}
+
+.auth_buttons_container > * {
+  margin-right: 0.5rem;
+}
