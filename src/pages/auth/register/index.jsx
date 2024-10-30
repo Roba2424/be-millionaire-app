@@ -1,12 +1,34 @@
 import { Button, Flex, Form, Input } from "antd";
 import AuthWrapper from "../../../components/shared/AuthWrapper";
 import { useForm } from "antd/es/form/Form";
+import { useState } from "react";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../../service/firebase";
 
 const Register = () => {
+  const [loading, setLoading] = useState(false);
   const [form] = useForm();
+  const handleRegister = async (values) => {
+    setLoading(true);
+    const { email, password } = values;
+
+    try {
+      const response = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      console.log(response, "RESPONSE");
+    } catch (error) {
+      console.log(error, "ERROR");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <AuthWrapper title="Register">
-      <Form layout="vertical" form={form}>
+      <Form layout="vertical" form={form} onFinish={handleRegister}>
         <Form.Item label="First Name" name="firstName">
           <Input type="text" placeholder="First Name" />
         </Form.Item>
@@ -21,7 +43,9 @@ const Register = () => {
         </Form.Item>
         <Flex justify="flex-end" className="auth_buttons_container">
           <Button>Sign In</Button>
-          <Button htmlType="submit">Create Account</Button>
+          <Button loading={loading} htmlType="submit">
+            Create Account
+          </Button>
         </Flex>
       </Form>
     </AuthWrapper>

@@ -1,12 +1,30 @@
-import { Button, Flex, Form, Input } from "antd";
+import { Button, Flex, Form, Input, notification } from "antd";
 import AuthWrapper from "../../../components/shared/AuthWrapper";
 import { useForm } from "antd/es/form/Form";
+import { useState } from "react";
+import { auth } from "../../../service/firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 const Login = () => {
   const [form] = useForm();
+  const [loading, setLoading] = useState(false);
+
+  const handleLogin = async (values) => {
+    setLoading(true);
+    try {
+      const { email, password } = values;
+      const response = await signInWithEmailAndPassword(auth, email, password);
+    } catch (error) {
+      notification.error({
+        message: "Invalid Login Credentials",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <AuthWrapper title="Login">
-      <Form layout="vertical" form={form}>
+      <Form layout="vertical" form={form} onFinish={handleLogin}>
         <Form.Item label="First Name" name="firstName">
           <Input type="text" placeholder="First Name" />
         </Form.Item>
@@ -21,7 +39,9 @@ const Login = () => {
         </Form.Item>
         <Flex justify="flex-end" className="auth_buttons_container">
           <Button>Create Account</Button>
-          <Button htmlType="submit">Login</Button>
+          <Button loading={loading} htmlType="submit">
+            Login
+          </Button>
         </Flex>
       </Form>
     </AuthWrapper>
