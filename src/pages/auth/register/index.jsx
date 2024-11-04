@@ -1,9 +1,11 @@
-import { Button, Flex, Form, Input } from "antd";
+import { Button, Flex, Form, Input, notification } from "antd";
 import AuthWrapper from "../../../components/shared/AuthWrapper";
 import { useForm } from "antd/es/form/Form";
 import { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../service/firebase";
+import { Link } from "react-router-dom";
+import { ROUTE_CONSTANTS } from "../../../core/utils/constants/constant";
 
 const Register = () => {
   const [loading, setLoading] = useState(false);
@@ -18,8 +20,12 @@ const Register = () => {
         email,
         password
       );
-      console.log(response, "RESPONSE");
+      notification.success({ message: "User created successfully" });
+      console.log(response);
     } catch (error) {
+      notification.error({
+        message: "Something went wrong.",
+      });
       console.log(error, "ERROR");
     } finally {
       setLoading(false);
@@ -39,10 +45,12 @@ const Register = () => {
           <Input type="text" placeholder="Email" />
         </Form.Item>
         <Form.Item label="Password" name="password">
-          <Input type="text" placeholder="Password" />
+          <Input.Password type="text" placeholder="Password" />
         </Form.Item>
         <Flex justify="flex-end" className="auth_buttons_container">
-          <Button>Sign In</Button>
+          <Button>
+            <Link to={ROUTE_CONSTANTS.LOGIN}>Sign In</Link>
+          </Button>
           <Button loading={loading} htmlType="submit">
             Create Account
           </Button>

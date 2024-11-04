@@ -4,6 +4,8 @@ import { useForm } from "antd/es/form/Form";
 import { useState } from "react";
 import { auth } from "../../../service/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { Link } from "react-router-dom";
+import { ROUTE_CONSTANTS } from "../../../core/utils/constants/constant";
 
 const Login = () => {
   const [form] = useForm();
@@ -13,7 +15,7 @@ const Login = () => {
     setLoading(true);
     try {
       const { email, password } = values;
-      const response = await signInWithEmailAndPassword(auth, email, password);
+      await signInWithEmailAndPassword(auth, email, password);
     } catch (error) {
       notification.error({
         message: "Invalid Login Credentials",
@@ -25,20 +27,16 @@ const Login = () => {
   return (
     <AuthWrapper title="Login">
       <Form layout="vertical" form={form} onFinish={handleLogin}>
-        <Form.Item label="First Name" name="firstName">
-          <Input type="text" placeholder="First Name" />
-        </Form.Item>
-        <Form.Item label="Last Name" name="lastName">
-          <Input type="text" placeholder="Last Name" />
-        </Form.Item>
         <Form.Item label="Email" name="email">
           <Input type="text" placeholder="Email" />
         </Form.Item>
         <Form.Item label="Password" name="password">
-          <Input type="text" placeholder="Password" />
+          <Input.Password type="text" placeholder="Password" />
         </Form.Item>
         <Flex justify="flex-end" className="auth_buttons_container">
-          <Button>Create Account</Button>
+          <Button>
+            <Link to={ROUTE_CONSTANTS.REGISTER}>Create Account</Link>
+          </Button>
           <Button loading={loading} htmlType="submit">
             Login
           </Button>
