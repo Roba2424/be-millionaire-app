@@ -10,8 +10,11 @@ import Register from "./pages/auth/register";
 import { useEffect, useState } from "react";
 import { auth } from "./service/firebase";
 import { onAuthStateChanged } from "firebase/auth";
-import { ROUTE_CONSTANTS } from "./core/utils/constants/constant";
+import { ROUTE_CONSTANTS } from "./core/utils/constants/index";
 import Preview from "./pages/preview";
+import MillionaireGame from "./pages/milionaireGame";
+import "./global/style/style.css";
+
 const App = () => {
   const [isAuth, setIsAuth] = useState(false);
 
@@ -50,6 +53,16 @@ const App = () => {
               path={ROUTE_CONSTANTS.PREVIEW}
               element={
                 isAuth ? <Preview /> : <Navigate to={ROUTE_CONSTANTS.LOGIN} />
+              }
+            />
+            <Route
+              path={ROUTE_CONSTANTS.GAME}
+              element={
+                isAuth ? (
+                  <MillionaireGame />
+                ) : (
+                  <Navigate to={ROUTE_CONSTANTS.LOGIN} />
+                )
               }
             />
           </Route>

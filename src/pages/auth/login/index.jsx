@@ -5,7 +5,7 @@ import { useState } from "react";
 import { auth } from "../../../service/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { Link } from "react-router-dom";
-import { ROUTE_CONSTANTS } from "../../../core/utils/constants/constant";
+import { ROUTE_CONSTANTS } from "../../../core/utils/constants/index";
 
 const Login = () => {
   const [form] = useForm();

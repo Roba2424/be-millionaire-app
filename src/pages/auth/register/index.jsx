@@ -5,7 +5,7 @@ import { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../service/firebase";
 import { Link } from "react-router-dom";
-import { ROUTE_CONSTANTS } from "../../../core/utils/constants/constant";
+import { ROUTE_CONSTANTS } from "../../../core/utils/constants/index";
 
 const Register = () => {
   const [loading, setLoading] = useState(false);
