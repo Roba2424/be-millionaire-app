@@ -1,0 +1,28 @@
+.win-message {
+  text-align: center;
+  color: #27ae60;
+}
+
+.win-message h2 {
+  font-size: 2em;
+}
+
+.win-message p {
+  font-size: 1.5em;
+  margin-top: 10px;
+}
+
+.reset-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1em;
+  transition: background-color 0.3s;
+}
+
+.reset-button:hover {
+  background-color: #c0392b;
+}

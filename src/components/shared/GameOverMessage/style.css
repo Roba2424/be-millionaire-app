@@ -1,0 +1,13 @@
+.game-over-message {
+  text-align: center;
+}
+
+.reset-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #e74c3c;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1em;
+}

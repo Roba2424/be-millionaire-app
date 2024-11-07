@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { questions } from "../../core/utils/constants/index";
 import { generateFibonacciPrizes } from "../../core/utils/function/fibonacci";
+import GameLayout from "../../components/layout/GameLayout/index";
+import GameOverMessage from "../../components/shared/GameOverMessage";
+import WinMessage from "../../components/shared/WinMessage/index";
 import "./style.css";
 
 const MillionaireGame = () => {
@@ -54,25 +57,13 @@ const MillionaireGame = () => {
   };
 
   return (
-    <div className="game-layout">
+    <GameLayout>
       {/* Question Section */}
       <div className="left-panel">
         {isGameOver ? (
-          <div className="game-over-message">
-            <h2>Game Over!</h2>
-            <p>You lost the game. Final prize: ${prize}</p>
-            <button onClick={resetGame} className="reset-button">
-              Try Again
-            </button>
-          </div>
+          <GameOverMessage resetGame={resetGame} prize={prize} />
         ) : isWinner ? (
-          <div className="win-message">
-            <h2>Congratulations!</h2>
-            <p>You Win ${prize}!</p>
-            <button onClick={resetGame} className="reset-button">
-              Play Again
-            </button>
-          </div>
+          <WinMessage prize={prize} resetGame={resetGame} />
         ) : (
           <>
             <div className="question-container">
@@ -112,7 +103,7 @@ const MillionaireGame = () => {
           </div>
         ))}
       </div>
-    </div>
+    </GameLayout>
   );
 };
 
