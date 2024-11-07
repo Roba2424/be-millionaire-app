@@ -30,6 +30,16 @@ const App = () => {
         createRoutesFromElements(
           <Route path="/">
             <Route
+              index
+              element={
+                isAuth ? (
+                  <Navigate to={ROUTE_CONSTANTS.PREVIEW} />
+                ) : (
+                  <Navigate to={ROUTE_CONSTANTS.REGISTER} />
+                )
+              }
+            />
+            <Route
               path={ROUTE_CONSTANTS.LOGIN}
               element={
                 isAuth ? (
