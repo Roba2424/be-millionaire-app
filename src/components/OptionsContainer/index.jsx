@@ -6,6 +6,9 @@ const OptionContainer = ({
   selectedOption,
   onSelectOption,
   correctOptionIndex,
+  hiddenOptions,
+  hasUsedAudience,
+  audienceVotes
 }) => (
   <>
     <div className="question-container">
@@ -17,10 +20,14 @@ const OptionContainer = ({
           key={index}
           className={`option-button ${
             selectedOption === index ? "selected" : ""
-          } ${correctOptionIndex === index ? "correct-option" : ""}`}
+          } ${correctOptionIndex === index ? "correct-option" : ""}
+          ${hiddenOptions.includes(index) ? "hidden-option" : ""}`}
           onClick={() => onSelectOption(index)}
         >
           {option}
+          {hasUsedAudience && audienceVotes.length > 0 && (
+            <span className="audience-vote">({audienceVotes[index]}%)</span>
+          )}
         </button>
       ))}
     </div>

@@ -6,6 +6,7 @@ import GameOverMessage from "../../components/shared/GameOverMessage";
 import WinMessage from "../../components/shared/WinMessage/index";
 import OptionContainer from "../../components/OptionsContainer";
 import PrizeScale from "../../components/PrizeScale";
+import { generateAudienceVotes } from "../../core/utils/function/generateAudiencVotes";
 import "./style.css";
 
 const MillionaireGame = () => {
@@ -16,6 +17,10 @@ const MillionaireGame = () => {
   const [correctAnswers, setCorrectAnswers] = useState([]);
   const [isWinner, setIsWinner] = useState(false);
   const [correctOptionIndex, setCorrectOptionIndex] = useState(null);
+  const [hasUsedFiftyFifty, setHasUsedFiftyFifty] = useState(false);
+  const [hiddenOptions, setHiddenOptions] = useState([]);
+  const [hasUsedAudience, setHasUsedAudience] = useState(false);
+  const [audienceVotes, setAudienceVotes] = useState([]);
 
   const fibonacciPrizes = generateFibonacciPrizes(questions.length);
 
@@ -37,6 +42,8 @@ const MillionaireGame = () => {
           setSelectedOption(null);
           setCorrectOptionIndex(null);
           setCurrentQuestionIndex(currentQuestionIndex + 1);
+          setHiddenOptions([]);
+          setAudienceVotes([]);
         }, 2000);
       }
     } else {
@@ -48,6 +55,28 @@ const MillionaireGame = () => {
     }
   };
 
+  const handleFiftyFifty = () => {
+    if (hasUsedFiftyFifty) return;
+    setHasUsedFiftyFifty(true);
+
+    const incorrectOptions = currentQuestion.options
+      .map((_, index) => index)
+      .filter((index) => index !== currentQuestion.correctOption);
+
+    const optionsToHide = incorrectOptions
+      .sort(() => Math.random() - 0.5)
+      .slice(0, 2);
+    setHiddenOptions(optionsToHide);
+  };
+
+  const handleAskAudience = () => {
+    if (hasUsedAudience) return;
+
+    setHasUsedAudience(true);
+    const votes = generateAudienceVotes(currentQuestion.correctOption);
+    setAudienceVotes(votes);
+  };
+
   const resetGame = () => {
     setCurrentQuestionIndex(0);
     setSelectedOption(null);
@@ -56,6 +85,10 @@ const MillionaireGame = () => {
     setCorrectAnswers([]);
     setIsWinner(false);
     setCorrectOptionIndex(null);
+    setHasUsedFiftyFifty(false);
+    setHasUsedAudience(false);
+    setHiddenOptions([]);
+    setAudienceVotes([]);
   };
 
   return (
@@ -74,6 +107,9 @@ const MillionaireGame = () => {
               selectedOption={selectedOption}
               correctOptionIndex={correctOptionIndex}
               currentQuestion={currentQuestion.question}
+              hiddenOptions={hiddenOptions}
+              audienceVotes={audienceVotes}
+              hasUsedAudience={hasUsedAudience}
             />
           </>
         )}
@@ -86,6 +122,10 @@ const MillionaireGame = () => {
         currentQuestionIndex={currentQuestionIndex}
         isGameOver={isGameOver}
         isWinner={isWinner}
+        handleAskAudience={handleAskAudience}
+        hasUsedAudience={hasUsedAudience}
+        handleFiftyFifty={handleFiftyFifty}
+        hasUsedFiftyFifty={hasUsedFiftyFifty}
       />
     </GameLayout>
   );

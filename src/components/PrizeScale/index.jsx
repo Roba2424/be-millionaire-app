@@ -6,6 +6,10 @@ const PrizeScale = ({
   currentQuestionIndex,
   isGameOver,
   isWinner,
+  handleFiftyFifty,
+  hasUsedFiftyFifty,
+  handleAskAudience,
+  hasUsedAudience,
 }) => (
   <div className="right-panel">
     <ol>
@@ -24,6 +28,22 @@ const PrizeScale = ({
         </li>
       ))}
     </ol>
+    <div className="help-container">
+      <button
+        onClick={handleFiftyFifty}
+        disabled={hasUsedFiftyFifty}
+        className="help-button"
+      >
+        50 : 50
+      </button>
+      <button
+        onClick={handleAskAudience}
+        disabled={hasUsedAudience}
+        className="help-button"
+      >
+        Ask the Audience
+      </button>
+    </div>
   </div>
 );
 

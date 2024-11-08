@@ -38,3 +38,25 @@
     transform: scale(1);
   }
 }
+
+.help-container {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.help-button {
+  padding: 10px 20px;
+  font-size: 1em;
+  cursor: pointer;
+  margin-left: 5px;
+  background-color: #f39c12;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+}
+
+.help-button:disabled {
+  background-color: #7f8c8d;
+  cursor: not-allowed;
+}
