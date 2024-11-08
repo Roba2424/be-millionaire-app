@@ -4,6 +4,8 @@ import { generateFibonacciPrizes } from "../../core/utils/function/fibonacci";
 import GameLayout from "../../components/layout/GameLayout/index";
 import GameOverMessage from "../../components/shared/GameOverMessage";
 import WinMessage from "../../components/shared/WinMessage/index";
+import OptionContainer from "../../components/OptionsContainer";
+import PrizeScale from "../../components/PrizeScale";
 import "./style.css";
 
 const MillionaireGame = () => {
@@ -66,43 +68,25 @@ const MillionaireGame = () => {
           <WinMessage prize={prize} resetGame={resetGame} />
         ) : (
           <>
-            <div className="question-container">
-              <h2>{currentQuestion.question}</h2>
-            </div>
-            <div className="options-container">
-              {currentQuestion.options.map((option, index) => (
-                <button
-                  key={index}
-                  onClick={() => handleOptionClick(index)}
-                  className={`option-button ${
-                    selectedOption === index ? "selected" : ""
-                  } ${correctOptionIndex === index ? "correct-option" : ""}`}
-                >
-                  {option}
-                </button>
-              ))}
-            </div>
+            <OptionContainer
+              options={currentQuestion.options}
+              onSelectOption={handleOptionClick}
+              selectedOption={selectedOption}
+              correctOptionIndex={correctOptionIndex}
+              currentQuestion={currentQuestion.question}
+            />
           </>
         )}
       </div>
 
       {/* Prize Scale */}
-      <div className="right-panel">
-        {fibonacciPrizes.map((prizeAmount, index) => (
-          <div
-            key={index}
-            className={`prize-item ${
-              correctAnswers.includes(index) ? "won-prize" : ""
-            } ${
-              index === currentQuestionIndex && !isGameOver && !isWinner
-                ? "current-prize"
-                : ""
-            }`}
-          >
-            {index + 1}. ${prizeAmount.toLocaleString()}
-          </div>
-        ))}
-      </div>
+      <PrizeScale
+        fibonacciPrizes={fibonacciPrizes}
+        currentPrize={correctAnswers}
+        currentQuestionIndex={currentQuestionIndex}
+        isGameOver={isGameOver}
+        isWinner={isWinner}
+      />
     </GameLayout>
   );
 };
