@@ -11,7 +11,6 @@ import { useEffect, useState } from "react";
 import { auth } from "./service/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { ROUTE_CONSTANTS } from "./core/utils/constants/index";
-import Preview from "./pages/preview";
 import MillionaireGame from "./pages/milionaireGame";
 import "./global/style/style.css";
 
@@ -33,7 +32,7 @@ const App = () => {
               index
               element={
                 isAuth ? (
-                  <Navigate to={ROUTE_CONSTANTS.PREVIEW} />
+                  <Navigate to={ROUTE_CONSTANTS.GAME} />
                 ) : (
                   <Navigate to={ROUTE_CONSTANTS.REGISTER} />
                 )
@@ -43,7 +42,7 @@ const App = () => {
               path={ROUTE_CONSTANTS.LOGIN}
               element={
                 isAuth ? (
-                  <Navigate to={ROUTE_CONSTANTS.PREVIEW} />
+                  <Navigate to={ROUTE_CONSTANTS.GAME} />
                 ) : (
                   <Login setIsAuth={setIsAuth} />
                 )
@@ -52,17 +51,7 @@ const App = () => {
             <Route
               path={ROUTE_CONSTANTS.REGISTER}
               element={
-                isAuth ? (
-                  <Navigate to={ROUTE_CONSTANTS.PREVIEW} />
-                ) : (
-                  <Register />
-                )
-              }
-            />
-            <Route
-              path={ROUTE_CONSTANTS.PREVIEW}
-              element={
-                isAuth ? <Preview /> : <Navigate to={ROUTE_CONSTANTS.LOGIN} />
+                isAuth ? <Navigate to={ROUTE_CONSTANTS.GAME} /> : <Register />
               }
             />
             <Route

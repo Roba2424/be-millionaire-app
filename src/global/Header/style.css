@@ -1,0 +1,34 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  position: absolute;
+  width: 98%;
+  z-index: 10;
+  background-color: #f39c12;
+}
+
+.header img {
+  width: 50px;
+}
+
+.logout-button {
+  font-size: 1rem;
+  padding: 10px 15px;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.logout-button:hover {
+  background-color: #c0392b;
+}
+
+.username-display {
+  font-size: 1rem;
+  color: white;
+  font-weight: bold;
+}

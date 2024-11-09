@@ -7,6 +7,7 @@ import WinMessage from "../../components/shared/WinMessage/index";
 import OptionContainer from "../../components/OptionsContainer";
 import PrizeScale from "../../components/PrizeScale";
 import { generateAudienceVotes } from "../../core/utils/function/generateAudiencVotes";
+import Header from "../../global/Header";
 import "./style.css";
 
 const MillionaireGame = () => {
@@ -92,42 +93,44 @@ const MillionaireGame = () => {
   };
 
   return (
-    <GameLayout>
-      {/* Question Section */}
-      <div className="left-panel">
-        {isGameOver ? (
-          <GameOverMessage resetGame={resetGame} prize={prize} />
-        ) : isWinner ? (
-          <WinMessage prize={prize} resetGame={resetGame} />
-        ) : (
-          <>
-            <OptionContainer
-              options={currentQuestion.options}
-              onSelectOption={handleOptionClick}
-              selectedOption={selectedOption}
-              correctOptionIndex={correctOptionIndex}
-              currentQuestion={currentQuestion.question}
-              hiddenOptions={hiddenOptions}
-              audienceVotes={audienceVotes}
-              hasUsedAudience={hasUsedAudience}
-            />
-          </>
-        )}
-      </div>
+    <Header>
+      <GameLayout>
+        {/* Question Section */}
+        <div className="left-panel">
+          {isGameOver ? (
+            <GameOverMessage resetGame={resetGame} prize={prize} />
+          ) : isWinner ? (
+            <WinMessage prize={prize} resetGame={resetGame} />
+          ) : (
+            <>
+              <OptionContainer
+                options={currentQuestion.options}
+                onSelectOption={handleOptionClick}
+                selectedOption={selectedOption}
+                correctOptionIndex={correctOptionIndex}
+                currentQuestion={currentQuestion.question}
+                hiddenOptions={hiddenOptions}
+                audienceVotes={audienceVotes}
+                hasUsedAudience={hasUsedAudience}
+              />
+            </>
+          )}
+        </div>
 
-      {/* Prize Scale */}
-      <PrizeScale
-        fibonacciPrizes={fibonacciPrizes}
-        currentPrize={correctAnswers}
-        currentQuestionIndex={currentQuestionIndex}
-        isGameOver={isGameOver}
-        isWinner={isWinner}
-        handleAskAudience={handleAskAudience}
-        hasUsedAudience={hasUsedAudience}
-        handleFiftyFifty={handleFiftyFifty}
-        hasUsedFiftyFifty={hasUsedFiftyFifty}
-      />
-    </GameLayout>
+        {/* Prize Scale */}
+        <PrizeScale
+          fibonacciPrizes={fibonacciPrizes}
+          currentPrize={correctAnswers}
+          currentQuestionIndex={currentQuestionIndex}
+          isGameOver={isGameOver}
+          isWinner={isWinner}
+          handleAskAudience={handleAskAudience}
+          hasUsedAudience={hasUsedAudience}
+          handleFiftyFifty={handleFiftyFifty}
+          hasUsedFiftyFifty={hasUsedFiftyFifty}
+        />
+      </GameLayout>
+    </Header>
   );
 };
 
