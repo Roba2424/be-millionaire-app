@@ -1,6 +1,6 @@
 import { auth } from "../../service/firebase";
 import "./style.css";
-import iconn from "../../img/millionaire-icon.png";
+import headerIcon from "../../img/millionaire-icon.png";
 
 const Header = ({ children }) => {
   const handleLogout = () => {
@@ -9,7 +9,7 @@ const Header = ({ children }) => {
   return (
     <div>
       <div className="header">
-        <img src={iconn} alt="" />
+        <img src={headerIcon} alt="" />
         <button onClick={handleLogout} className="logout-button">
           Logout
         </button>

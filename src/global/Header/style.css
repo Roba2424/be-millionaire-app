@@ -2,20 +2,23 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
+  padding: 15px 0;
   position: absolute;
-  width: 98%;
+  width: 100%;
   z-index: 10;
   background-color: #f39c12;
 }
 
 .header img {
+  margin: 0 10px;
   width: 50px;
 }
 
 .logout-button {
   font-size: 1rem;
   padding: 10px 15px;
+  margin: 0 10px;
+
   background-color: #e74c3c;
   color: white;
   border: none;
@@ -27,8 +30,4 @@
   background-color: #c0392b;
 }
 
-.username-display {
-  font-size: 1rem;
-  color: white;
-  font-weight: bold;
-}
+
